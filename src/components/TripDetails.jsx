@@ -1,112 +1,44 @@
-import { useState } from "react";
-import { FaMapMarkedAlt } from "react-icons/fa";
-import TripSummaryModal from "./TripSummary";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import MapComponent from './MapComponent';
 
-const TripDetails = () => {
-  const [formData, setFormData] = useState({
-    currentLocation: "",
-    pickupLocation: "",
-    dropoffLocation: "",
-    cycleHours: "",
-  });
+const TripDetails = ({ tripId }) => {
+  const [trip, setTrip] = useState(null);
 
-  const [tripData, setTripData] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    // Fetch trip details from the backend
+    axios.get(`http://localhost:8000/api/trips/${tripId}/`)
+      .then(response => {
+        setTrip(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching trip details:", error);
+      });
+  }, [tripId]);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!formData.currentLocation || !formData.pickupLocation || !formData.dropoffLocation || !formData.cycleHours) {
-      alert("Please fill in all fields before submitting.");
-      return;
-    }
-
-    setTripData(formData);
-    setShowModal(true);
-  };
+  if (!trip) return <div>Loading...</div>;
 
   return (
-    <div>
-      <div className="flex flex-col items-center justify-center bg-gray-50 py-20 pt-40 px-6 md:px-10 lg:px-20 min-h-[80vh]">
-        <form 
-          onSubmit={handleSubmit} 
-          className="flex flex-col items-start justify-center space-y-4 w-full max-w-xl p-6 bg-white shadow-md rounded-lg"
-        >
-          <fieldset className="flex flex-col w-full">
-            <label htmlFor="currentLocation" className="font-medium text-lg">
-              Current Location
-            </label>
-            <input
-              type="text"
-              id="currentLocation"
-              name="currentLocation"
-              value={formData.currentLocation}
-              onChange={handleChange}
-              className="w-full p-3 rounded-lg outline-none border border-gray-400"
-              placeholder="Enter current location"
-            />
-          </fieldset>
-
-          <fieldset className="flex flex-col w-full">
-            <label htmlFor="pickupLocation" className="font-medium text-lg">
-              Pickup Location
-            </label>
-            <input
-              type="text"
-              id="pickupLocation"
-              name="pickupLocation"
-              value={formData.pickupLocation}
-              onChange={handleChange}
-              className="w-full p-3 rounded-lg outline-none border border-gray-400"
-              placeholder="Enter pickup location"
-            />
-          </fieldset>
-
-          <fieldset className="flex flex-col w-full">
-            <label htmlFor="dropoffLocation" className="font-medium text-lg">
-              Dropoff Location
-            </label>
-            <input
-              type="text"
-              id="dropoffLocation"
-              name="dropoffLocation"
-              value={formData.dropoffLocation}
-              onChange={handleChange}
-              className="w-full p-3 rounded-lg outline-none border border-gray-400"
-              placeholder="Enter dropoff location"
-            />
-          </fieldset>
-
-          <fieldset className="flex flex-col w-full">
-            <label htmlFor="cycleHours" className="font-medium text-lg">
-              Current Cycle Used (Hours)
-            </label>
-            <input
-              type="number"
-              id="cycleHours"
-              name="cycleHours"
-              value={formData.cycleHours}
-              onChange={handleChange}
-              className="w-full p-3 rounded-lg outline-none border border-gray-400"
-              placeholder="Enter cycle hours used"
-            />
-          </fieldset>
-
-          <button 
-            type="submit"
-            className="w-full mt-2 p-3 bg-orange-500 hover:bg-black text-white rounded-xl transition-all duration-300 ease-in-out"
-          >
-            Generate Trip <FaMapMarkedAlt className="inline-block ml-2" />
-          </button>
-        </form>
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold mb-4">Trip Details</h1>
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold">Route Instructions</h2>
+        <ul className="list-disc pl-6">
+          {trip.route.current_to_pickup.steps.map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+          {trip.route.pickup_to_dropoff.steps.map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+        </ul>
       </div>
-
-      {/* Show Modal if Data Exists */}
-      {showModal && <TripSummaryModal tripData={tripData} onClose={() => setShowModal(false)} />}
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold">Map</h2>
+        <MapComponent route={[
+          ...trip.route.current_to_pickup.steps.map(step => [step.start_location.lat, step.start_location.lng]),
+          ...trip.route.pickup_to_dropoff.steps.map(step => [step.start_location.lat, step.start_location.lng])
+        ]} />
+      </div>
     </div>
   );
 };

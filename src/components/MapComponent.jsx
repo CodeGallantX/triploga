@@ -1,28 +1,27 @@
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
+import { useEffect } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
-const MapComponent = ({ tripData }) => {
-  const [route, setRoute] = useState([]);
-
+const MapComponent = ({ route }) => {
   useEffect(() => {
-    // TODO: Fetch route data from backend
-    setRoute([
-      [6.5244, 3.3792], // Example: Lagos
-      [7.3775, 3.9470], // Example: Abeokuta
-    ]);
-  }, [tripData]);
+    // Initialize the map
+    const map = L.map('map').setView([51.505, -0.09], 13);
 
-  return (
-    <MapContainer center={[6.5244, 3.3792]} zoom={6} className="h-96 w-full">
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {route.length > 0 && <Polyline positions={route} color="blue" />}
-      {route.map((pos, idx) => (
-        <Marker key={idx} position={pos} />
-      ))}
-    </MapContainer>
-  );
+    // Add a tile layer (e.g., OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add the route as a polyline
+    if (route) {
+      const polyline = L.polyline(route, { color: 'blue' }).addTo(map);
+
+      // Fit the map to the bounds of the route
+      map.fitBounds(polyline.getBounds());
+    }
+  }, [route]);
+
+  return <div id="map" style={{ height: '400px', width: '100%' }}></div>;
 };
 
 export default MapComponent;

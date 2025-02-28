@@ -16,9 +16,7 @@ const Footer = () => {
   return (
     <footer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 items-start justify-center bg-gray-100 border-t border-t-gray-300/50 py-20 px-6 md:px-10 lg:px-20">
       <div className="flex flex-col items-start justify-center space-y-3">
-        <h1
-          // onClick={()=> navigate("/")} 
-          className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500">TripLoga</h1>
+      <a href="/" className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500"><h1>TripLoga</h1></a>
         <p className="text-gray-700">Track your driver&apos; daily activity, stay updated.</p>
         <div className="flex flex-row items-center justify-start space-x-2 text-orange-600 text-3xl">
           <a href="#" rel="noopener noreferrer" className="hover:scale-110 transition-all transition-all duration-300 ease-in-out">

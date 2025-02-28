@@ -16,11 +16,15 @@ const TripDetails = ({ tripId: initialTripId }) => {
       setLoading(false);
       return;
     }
-
+  
     axios.get(`http://localhost:8000/api/trips/${tripId}/`)
       .then(response => {
-        setTrip(response.data);
-        setTripId(response.data.trip.id); // Ensure correct trip ID
+        if (!response.data || !response.data.trip) {
+          throw new Error('Invalid response structure');
+        }
+  
+        setTrip(response.data.trip);
+        setTripId(response.data.trip.id);
         setLoading(false);
       })
       .catch(error => {
@@ -29,6 +33,7 @@ const TripDetails = ({ tripId: initialTripId }) => {
         setLoading(false);
       });
   }, [tripId]);
+  
 
   const handleDownloadELDLog = () => {
     if (tripId) {

@@ -19,18 +19,25 @@ const TripForm = ({ onSubmit }) => {
     setError('');
     setLoading(true);
     setAlert(true);
+  
     try {
       const response = await axios.post('http://localhost:8000/api/trips/', formData);
-      console.log("API response: ", response.data.trip.id);
-      onSubmit(response.data.trip.id);
+      // console.log("API full response:", response.data); // Debugging
+  
+      if (response.data && response.data.trip) {
+        onSubmit(response.data.trip.id);
+      } else {
+        throw new Error("Unexpected API response format");
+      }
     } catch (error) {
       setError("Error submitting trip details. Please check your inputs.");
-      console.error("Error submitting trip details:", error);
+      console.error("Error submitting trip details:", error.response ? error.response.data : error.message);
     } finally {
       setLoading(false);
       setTimeout(() => setAlert(false), 3000);
     }
   };
+  
 
   return (
     <motion.div 

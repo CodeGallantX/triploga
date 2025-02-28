@@ -12,7 +12,7 @@ const App = () => {
       <Header />
       <div className="max-w-4xl mx-auto py-20 pt-40 px-10 xl:px-20">
         {!tripId ? (
-          <TripForm onSubmit={(response) => setTripId(response.data.trip.id)} />
+          <TripForm onSubmit={(id) => setTripId(id)} />
         ) : (
           <TripDetails tripId={tripId} />
         )}

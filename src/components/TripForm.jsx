@@ -22,10 +22,10 @@ const TripForm = ({ onSubmit }) => {
   
     try {
       const response = await axios.post('http://localhost:8000/api/trips/', formData);
-      // console.log("API full response:", response.data); // Debugging
+      console.log("API full response:", response.data); // Debugging
   
-      if (response.data && response.data.trip) {
-        onSubmit(response.data.trip.id);
+      if (response.data && typeof response.data === 'object') {
+        onSubmit(response.data);
       } else {
         throw new Error("Unexpected API response format");
       }

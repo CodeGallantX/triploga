@@ -7,7 +7,7 @@ const TripDetails = ({ trip }) => {
 
   const handleDownloadELDLog = () => {
     if (trip.id) {
-      window.open(`http://localhost:8000/api/eld-log/${trip.id}/`, '_blank');
+      window.open(`https://triploga-be.onrender.com/api/eld-log/${trip.id}/`, '_blank');
     }
   };
 
@@ -16,7 +16,7 @@ const TripDetails = ({ trip }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white p-6 rounded-lg shadow-md"
+      className="bg-gray-50 py-10"
     >
       <h1 className="text-2xl font-bold mb-4">Trip Details</h1>
 

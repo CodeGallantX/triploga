@@ -21,7 +21,7 @@ const TripForm = ({ onSubmit }) => {
     setAlert(true);
   
     try {
-      const response = await axios.post('http://localhost:8000/api/trips/', formData);
+      const response = await axios.post('https://triploga-be.onrender.com/api/trips/', formData);
       console.log("API full response:", response.data); // Debugging
   
       if (response.data && typeof response.data === 'object') {
@@ -44,9 +44,9 @@ const TripForm = ({ onSubmit }) => {
       initial={{ opacity: 0, y: -10 }} 
       animate={{ opacity: 1, y: 0 }} 
       transition={{ duration: 0.5 }}
-      className="bg-white p-6 rounded-xl shadow-lg w-full max-w-lg mx-auto"
+      className="bg-gray-50 py-10 w-full max-w-lg mx-auto"
     >
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Enter Trip Details</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Enter Trip Details</h2>
       
       <AnimatePresence>
         {alert && (
@@ -54,7 +54,7 @@ const TripForm = ({ onSubmit }) => {
             initial={{ opacity: 0, y: -10 }} 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="mb-4 p-3 bg-blue-100 border-l-4 border-blue-500 text-blue-700 rounded-lg"
+            className="mb-4 p-3 bg-blue-100 border-l-4 border-blue-500 text-blue-700 text-sm rounded-lg"
           >
             Generating Route... Please wait.
           </motion.div>

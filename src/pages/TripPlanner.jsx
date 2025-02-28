@@ -5,16 +5,16 @@ import TripForm from '../components/TripForm';
 import TripDetails from '../components/TripDetails';
 
 const App = () => {
-  const [trip, setTrip] = useState(null);
+  const [tripId, setTripId] = useState(null);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       <div className="max-w-4xl mx-auto py-20 pt-40 px-10 xl:px-20">
-        {!trip ? (
-          <TripForm onSubmit={(data) => setTrip(data)} />
+        {!tripId ? (
+          <TripForm onSubmit={(response) => setTripId(response.data.trip.id)} />
         ) : (
-          <TripDetails tripId={trip.id} />
+          <TripDetails tripId={tripId} />
         )}
       </div>
       <Footer />

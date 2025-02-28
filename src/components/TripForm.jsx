@@ -21,8 +21,8 @@ const TripForm = ({ onSubmit }) => {
     setAlert(true);
     try {
       const response = await axios.post('http://localhost:8000/api/trips/', formData);
-      console.log("API response: ", response.data);
-      onSubmit(response.data);
+      console.log("API response: ", response.data.trip.id);
+      onSubmit(response.data.trip.id);
     } catch (error) {
       setError("Error submitting trip details. Please check your inputs.");
       console.error("Error submitting trip details:", error);
@@ -37,7 +37,7 @@ const TripForm = ({ onSubmit }) => {
       initial={{ opacity: 0, y: -10 }} 
       animate={{ opacity: 1, y: 0 }} 
       transition={{ duration: 0.5 }}
-      className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto"
+      className="bg-white p-6 rounded-xl shadow-lg w-full max-w-lg mx-auto"
     >
       <h2 className="text-xl font-semibold mb-4 text-gray-800">Enter Trip Details</h2>
       

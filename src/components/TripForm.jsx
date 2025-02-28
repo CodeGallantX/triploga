@@ -44,7 +44,7 @@ const TripForm = ({ onSubmit }) => {
       initial={{ opacity: 0, y: -10 }} 
       animate={{ opacity: 1, y: 0 }} 
       transition={{ duration: 0.5 }}
-      className="bg-gray-50 py-10 w-full max-w-lg mx-auto"
+      className="bg-gray-50 md:bg-white md:rounded-xl md:shadow-lg md:p-6 w-full max-w-lg mx-auto"
     >
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">Enter Trip Details</h2>
       

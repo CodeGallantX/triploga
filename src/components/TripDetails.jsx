@@ -16,7 +16,7 @@ const TripDetails = ({ trip }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-50 py-10"
+      className="bg-gray-50 md:bg-white py-10 md:py-6 md:px-6 md:rounded-lg md:shadow-md"
     >
       <h1 className="text-2xl font-bold mb-4">Trip Details</h1>
 

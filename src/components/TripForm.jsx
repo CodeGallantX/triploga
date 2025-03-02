@@ -22,7 +22,7 @@ const TripForm = ({ onSubmit }) => {
   
     try {
       const response = await axios.post('https://triploga-be.onrender.com/api/trips/', formData);
-      console.log("API full response:", response.data); // Debugging
+      console.log("API full response:", response.data);
   
       if (response.data && typeof response.data === 'object') {
         onSubmit(response.data);

@@ -13,7 +13,7 @@ const Hero = () => {
         </a>
       </div>
       <div className="hidden lg:block">
-        <img src="/logistics-rafiki.svg" alt="Trip logging illustration" className="max-w-md" />
+        <img src="/logistics-rafiki.png" alt="Trip logging illustration" className="max-w-md" />
       </div>
     </div>
   )

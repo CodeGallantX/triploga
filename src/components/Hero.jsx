@@ -1,7 +1,7 @@
 const Hero = () => {
   return (
-    <div className="bg-gray-50 py-20 pt-40 px-6 md:px-10 lg:px-20 min-h-[90vh] flex items-center justify-between">
-      <div className="flex flex-col items-center lg:items-start justify-center space-y-3 md:space-y-6 w-full lg:max-w-2xl text-center lg:text-left">
+    <div className="bg-gray-50 py-20 pt-20 px-6 md:px-10 lg:px-20 min-h-[90vh] flex items-center justify-between">
+      <div className="flex flex-col items-center lg:items-start justify-center space-y-3 md:space-y-6 w-full lg:max-w-2xl text-center lg:text-left z-10">
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold">
           Smart Trip Logging & ELD Compliance
         </h1>
@@ -12,8 +12,13 @@ const Hero = () => {
           Start Logging Your Trip
         </a>
       </div>
-      <div className="hidden lg:block">
-        <img src="/logistics-rafiki.png" alt="Trip logging illustration" className="max-w-md" />
+      <div className="absolute w-full lg:w-2/5 lg:static top-7 inset-0 flex justify-center lg:justify-end items-center opacity-10 lg:opacity-100">
+          <img
+            src="https://ik.imagekit.io/mshcgnjju/Logistics-rafiki.png"
+            alt="Illustration Truck"
+            className="object-cover"
+          />
+
       </div>
     </div>
   )

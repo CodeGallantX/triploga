@@ -30,7 +30,7 @@ const TripForm = ({ onSubmit }) => {
         throw new Error("Unexpected API response format");
       }
     } catch (error) {
-      setError("Error submitting trip details. Please check your inputs.");
+      setError("Error submitting trip details. Please check your inputs: ");
       console.error("Error submitting trip details:", error.response ? error.response.data : error.message);
     } finally {
       setLoading(false);

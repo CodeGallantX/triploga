@@ -21,7 +21,8 @@ const TripForm = ({ onSubmit }) => {
     setAlert(true);
   
     try {
-      const response = await axios.post('https://triploga-be.onrender.com/api/trips/', formData);
+      // const response = await axios.post('https://triploga-be.onrender.com/api/trips/', formData);
+      const response = await axios.post('http://127.0.0.1:8000/api/trips/', formData);
       console.log("API full response:", response.data);
   
       if (response.data && typeof response.data === 'object') {

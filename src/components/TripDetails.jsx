@@ -7,8 +7,8 @@ const TripDetails = ({ trip }) => {
 
   const handleDownloadELDLog = () => {
     if (trip.id) {
-      // window.open(`https://triploga-be.onrender.com/api/eld-log/${trip.id}/`, '_blank');
-      window.open(`http://127.0.0.1:8000/api/eld-log/${trip.id}/`, '_blank');
+      window.open(`https://triploga-be.onrender.com/api/eld-log/${trip.id}/`, '_blank');
+      // window.open(`http://127.0.0.1:8000/api/eld-log/${trip.id}/`, '_blank');
     }
   };
 
